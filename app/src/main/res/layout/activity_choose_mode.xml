@@ -41,6 +41,7 @@
 
         <Button
             android:id="@+id/driverButton"
+            android:onClick="goToDriverSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
