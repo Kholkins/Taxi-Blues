@@ -2,6 +2,7 @@ package com.example.taxiblues;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }catch (Exception e){
                    e.printStackTrace();
                 }finally {
-
+                   startActivity(new Intent(SplashScreenActivity.this,SignInActivity.class));
                 }
             }
         };
