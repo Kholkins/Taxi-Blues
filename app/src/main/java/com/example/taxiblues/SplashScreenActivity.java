@@ -15,6 +15,11 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
+                try {
+
+                }catch (Exception e){
+
+                }
             }
         };
 
