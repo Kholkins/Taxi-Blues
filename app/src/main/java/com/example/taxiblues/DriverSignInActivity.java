@@ -49,6 +49,18 @@ public class DriverSignInActivity extends AppCompatActivity {
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
     }
 
+    private boolean validateEmail(){
+        String emailInput = textInputEmail.getEditText().getText().toString();
+
+        if (emailInput.isEmpty()) {
+            textInputEmail.setError("Please input your email");
+            return false;
+        } else {
+            textInputEmail.setError("");
+            return true;
+        }
+    }
+
     public void toggleLoginSignUp(View view) {
     }
 
