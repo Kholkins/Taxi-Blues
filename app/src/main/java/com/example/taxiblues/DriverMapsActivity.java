@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -44,6 +46,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -100,10 +105,14 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng driverLocation = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(driverLocation).title("Driver location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(driverLocation));
+        if (currentLocation != null) {
+
+            // Add a marker in Sydney and move the camera
+            LatLng driverLocation = new LatLng(currentLocation.getLatitude(),
+                    currentLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(driverLocation).title("Driver location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(driverLocation));
+        }
     }
 
     private void stopLocationUpdates() {
@@ -269,6 +278,12 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
             mMap.moveCamera(CameraUpdateFactory.newLatLng(driverLocation));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
             mMap.addMarker(new MarkerOptions().position(driverLocation).title("Driver location"));
+
+            String driverUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference drivers = FirebaseDatabase.getInstance().getReference().child("drivers");
+
+            GeoFire geoFire = new GeoFire(drivers);
+            geoFire.setLocation(driverUserID, new GeoLocation(currentLocation.getLatitude(),currentLocation.getLongitude()));
         }
 
     }
