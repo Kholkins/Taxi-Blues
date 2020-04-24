@@ -39,8 +39,8 @@ public class PassengerSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_sign_in);
 
-//        auth = FirebaseAuth.getInstance();
-//
+        auth = FirebaseAuth.getInstance();
+
 //        if (auth.getCurrentUser() != null) {
 //            startActivity(new Intent(PassengerSignInActivity.this,
 //                    PassengerMapsActivity.class));
