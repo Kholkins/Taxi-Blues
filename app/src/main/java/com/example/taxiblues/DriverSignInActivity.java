@@ -56,7 +56,7 @@ public class DriverSignInActivity extends AppCompatActivity {
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
     }
 
-    private boolean validateEmail(){
+    private boolean validateEmail() {
         String emailInput = textInputEmail.getEditText().getText().toString().trim();
 
         if (emailInput.isEmpty()) {
@@ -122,12 +122,12 @@ public class DriverSignInActivity extends AppCompatActivity {
     }
 
     public void toggleLoginSignUp(View view) {
-        if (isLoginModeActive){
+        if (isLoginModeActive) {
             isLoginModeActive = false;
             loginSignUpButton.setText("Sign Up");
             toggleLoginSignUpTextView.setText("Or, log in");
             textInputConfirmPassword.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             isLoginModeActive = true;
             loginSignUpButton.setText("Log In");
             toggleLoginSignUpTextView.setText("Or, sign up");
@@ -137,11 +137,12 @@ public class DriverSignInActivity extends AppCompatActivity {
 
     public void loginSignUpUser(View view) {
 
-        if (!validateEmail() | !validateName() | !validatePassword()) {
-            return;
-        }
+        if (isLoginModeActive) {
 
-        if (isLoginModeActive){
+            if (!validateEmail() | !validateName() | !validatePassword()) {
+                return;
+            }
+
             auth.signInWithEmailAndPassword(textInputEmail.getEditText().getText().toString().trim(),
                     textInputPassword.getEditText().getText().toString().trim())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -164,7 +165,13 @@ public class DriverSignInActivity extends AppCompatActivity {
                             // ...
                         }
                     });
-        }else {
+        } else {
+
+            if (!validateEmail() | !validateName() | !validatePassword() |
+                    !validateConfirmPassword()) {
+                return;
+            }
+
             auth.createUserWithEmailAndPassword(
                     textInputEmail.getEditText().getText().toString().trim(),
                     textInputPassword.getEditText().getText().toString().trim())
@@ -188,7 +195,6 @@ public class DriverSignInActivity extends AppCompatActivity {
                         }
                     });
         }
-
 
 
     }
