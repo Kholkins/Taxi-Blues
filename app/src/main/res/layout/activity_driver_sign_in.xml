@@ -8,6 +8,17 @@
     android:padding="16dp"
     tools:context=".DriverSignInActivity">
 
+    <TextView
+        android:text="Driver Sign In"
+        android:textAllCaps="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorAccent"
+
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEmail"
         android:layout_width="match_parent"
