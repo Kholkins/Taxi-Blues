@@ -41,10 +41,10 @@ public class PassengerSignInActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-//        if (auth.getCurrentUser() != null) {
-//            startActivity(new Intent(PassengerSignInActivity.this,
-//                    PassengerMapsActivity.class));
-//        }
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(PassengerSignInActivity.this,
+                    PassengerMapsActivity.class));
+        }
 
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputName = findViewById(R.id.textInputName);
@@ -54,6 +54,7 @@ public class PassengerSignInActivity extends AppCompatActivity {
         loginSignUpButton = findViewById(R.id.loginSignUpButton);
         toggleLoginSignUpTextView = findViewById(R.id.toggleLoginSignUpTextView);
     }
+
 
     private boolean validateEmail() {
 
@@ -125,34 +126,39 @@ public class PassengerSignInActivity extends AppCompatActivity {
 
     public void loginSignUpUser(View view) {
 
+        if (!validateEmail() | !validateName() | !validatePassword()) {
+            return;
+        }
+
         if (isLoginModeActive) {
-
-            if (!validateEmail() | !validateName() | !validatePassword()) {
-                return;
-            }
-
-            auth.signInWithEmailAndPassword(textInputEmail.getEditText().getText().toString().trim(),
+            auth.signInWithEmailAndPassword(
+                    textInputEmail.getEditText().getText().toString().trim(),
                     textInputPassword.getEditText().getText().toString().trim())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success");
-                                FirebaseUser user = auth.getCurrentUser();
-//                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(PassengerSignInActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-//                                updateUI(null);
-                                // ...
-                            }
+                    .addOnCompleteListener(this,
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = auth.getCurrentUser();
+                                        startActivity(new Intent(
+                                                PassengerSignInActivity.this,
+                                                PassengerMapsActivity.class
+                                        ));
 
-                            // ...
-                        }
-                    });
+                                        //updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(PassengerSignInActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
+
+                                    // ...
+                                }
+                            });
         } else {
 
             if (!validateEmail() | !validateName() | !validatePassword() |
@@ -163,26 +169,35 @@ public class PassengerSignInActivity extends AppCompatActivity {
             auth.createUserWithEmailAndPassword(
                     textInputEmail.getEditText().getText().toString().trim(),
                     textInputPassword.getEditText().getText().toString().trim())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = auth.getCurrentUser();
-//                            updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(PassengerSignInActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
-                            }
+                    .addOnCompleteListener(this,
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        FirebaseUser user = auth.getCurrentUser();
+                                        startActivity(new Intent(
+                                                PassengerSignInActivity.this,
+                                                PassengerMapsActivity.class
+                                        ));
+                                        //updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWithEmail:failure",
+                                                task.getException());
+                                        Toast.makeText(PassengerSignInActivity.this,
+                                                "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
 
-                            // ...
-                        }
-                    });
+                                    // ...
+                                }
+                            });
         }
+
+
 
     }
 
