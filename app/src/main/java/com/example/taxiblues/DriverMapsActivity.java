@@ -77,6 +77,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     FirebaseAuth auth;
     FirebaseUser currentUser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +110,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         buildLocationSettingsRequest();
 
         startLocationUpdates();
+
     }
 
     private void signOutDriver() {
@@ -116,7 +118,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         String driverUserId = currentUser.getUid();
         DatabaseReference drivers = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("drivers");
+                .child("driversGeoFire");
 
         GeoFire geoFire = new GeoFire(drivers);
         geoFire.removeLocation(driverUserId);
@@ -274,7 +276,6 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                         Log.d("MainActivity", "User has not agreed to change location" +
                                 "settings");
                         isLocationUpdatesActive = false;
-
                         updateLocationUi();
                         break;
                 }
@@ -312,17 +313,23 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     private void updateLocationUi() {
 
         if (currentLocation != null) {
-            LatLng driverLocation = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
 
+            LatLng driverLocation = new LatLng(currentLocation.getLatitude(),
+                    currentLocation.getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(driverLocation));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
             mMap.addMarker(new MarkerOptions().position(driverLocation).title("Driver location"));
 
-            String driverUserID = currentUser.getUid();
-            DatabaseReference drivers = FirebaseDatabase.getInstance().getReference().child("drivers");
+            String driverUserId = currentUser.getUid();
+            DatabaseReference driversGeoFire = FirebaseDatabase.getInstance().getReference()
+                    .child("driversGeoFire");
+            DatabaseReference drivers = FirebaseDatabase.getInstance().getReference()
+                    .child("drivers");
+            drivers.setValue(true);
 
-            GeoFire geoFire = new GeoFire(drivers);
-            geoFire.setLocation(driverUserID, new GeoLocation(currentLocation.getLatitude(),currentLocation.getLongitude()));
+            GeoFire geoFire = new GeoFire(driversGeoFire);
+            geoFire.setLocation(driverUserId, new GeoLocation(currentLocation.getLatitude(),
+                    currentLocation.getLongitude()));
         }
 
     }
