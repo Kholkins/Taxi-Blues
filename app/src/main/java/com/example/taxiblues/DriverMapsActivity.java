@@ -121,6 +121,13 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         GeoFire geoFire = new GeoFire(drivers);
         geoFire.removeLocation(driverUserId);
 
+        Intent intent = new Intent(DriverMapsActivity.this,
+                ChooseModeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+
     }
 
 
