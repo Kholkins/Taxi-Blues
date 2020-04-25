@@ -42,10 +42,10 @@ public class DriverSignInActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-//        if (auth.getCurrentUser() != null) {
-//            startActivity(new Intent(DriverSignInActivity.this,
-//                    DriverMapsActivity.class));
-//        }
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(DriverSignInActivity.this,
+                    DriverMapsActivity.class));
+        }
 
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputName = findViewById(R.id.textInputName);

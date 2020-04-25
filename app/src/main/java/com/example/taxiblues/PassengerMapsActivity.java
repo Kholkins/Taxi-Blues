@@ -113,7 +113,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         String driverUserId = currentUser.getUid();
         DatabaseReference drivers = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("drivers");
+                .child("passengers");
 
         GeoFire geoFire = new GeoFire(drivers);
         geoFire.removeLocation(driverUserId);
@@ -316,7 +316,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             mMap.addMarker(new MarkerOptions().position(driverLocation).title("Driver location"));
 
             String driverUserID = currentUser.getUid();
-            DatabaseReference drivers = FirebaseDatabase.getInstance().getReference().child("drivers");
+            DatabaseReference drivers = FirebaseDatabase.getInstance().getReference().child("passengers");
 
             GeoFire geoFire = new GeoFire(drivers);
             geoFire.setLocation(driverUserID, new GeoLocation(currentLocation.getLatitude(),currentLocation.getLongitude()));
