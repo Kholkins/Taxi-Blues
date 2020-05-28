@@ -1,12 +1,10 @@
-package com.example.taxiblues;
+package com.holkins.taxiblues;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ChooseModeActivity extends AppCompatActivity {
 

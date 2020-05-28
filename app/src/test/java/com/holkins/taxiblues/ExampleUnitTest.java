@@ -1,4 +1,4 @@
-package com.example.taxiblues;
+package com.holkins.taxiblues;
 
 import org.junit.Test;
 

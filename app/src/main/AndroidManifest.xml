@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.taxiblues">
+    package="com.holkins.taxiblues">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -30,13 +30,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".DriverMapsActivity"
+            android:name="com.holkins.taxiblues.DriverMapsActivity"
             android:label="@string/title_activity_driver_maps"></activity>
-        <activity android:name=".PassengerMapsActivity" />
-        <activity android:name=".DriverSignInActivity" />
-        <activity android:name=".PassengerSignInActivity" />
-        <activity android:name=".ChooseModeActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name="com.holkins.taxiblues.PassengerMapsActivity" />
+        <activity android:name="com.holkins.taxiblues.DriverSignInActivity" />
+        <activity android:name="com.holkins.taxiblues.PassengerSignInActivity" />
+        <activity android:name="com.holkins.taxiblues.ChooseModeActivity" />
+        <activity android:name="com.holkins.taxiblues.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

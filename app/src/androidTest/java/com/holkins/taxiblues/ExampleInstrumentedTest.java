@@ -1,4 +1,4 @@
-package com.example.taxiblues;
+package com.holkins.taxiblues;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.taxiblues", appContext.getPackageName());
+        assertEquals("com.holkins.taxiblues", appContext.getPackageName());
     }
 }

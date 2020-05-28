@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:390207798137:android:f7e103a8abc2f2f0fe4da8",
+        "mobilesdk_app_id": "1:390207798137:android:b0b29fa20c7711f3fe4da8",
         "android_client_info": {
-          "package_name": "com.example.taxiblues"
+          "package_name": "com.holkins.taxiblues"
         }
       },
       "oauth_client": [
         {
-          "client_id": "390207798137-m16uu2a9id67741rtp9330omd267fjpk.apps.googleusercontent.com",
+          "client_id": "390207798137-d3i8tahtungg2ren16ek4gj6jv0e9dv4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.taxiblues",
+            "package_name": "com.holkins.taxiblues",
             "certificate_hash": "cd7de9a485940b64ebc10a04650b463bbea63391"
           }
         },
@@ -29,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBW6ZolbyYU11G5kCYRQB9F4yeEu-_H7sI"
+          "current_key": "AIzaSyCZlqX81mz1BqBhuqQBRK195YI1wKF5kPA"
         }
       ],
       "services": {
